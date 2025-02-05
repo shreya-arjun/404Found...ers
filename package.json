@@ -1,5 +1,5 @@
 {
-  "name": "ls",
+  "name": "Tune/In",
   "version": "1.0.0",
   "description": "",
   "homepage": "https://github.com/mallworth/404Found...ers#readme",
@@ -12,12 +12,17 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "start-frontend": "npm run -w frontend start",
+    "start-backend": "npm run -w backend start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": [
-	"packages/*"
-  ]
+    "packages/*"
+  ],
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "prettier": "3.4.2"
+  }
 }
