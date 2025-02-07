@@ -32,4 +32,5 @@ You can also use ```npm run style``` to run both of the above scripts.
 Both Prettier and ESLint provide instructions for integrating with your editor.
 
 Prettier: [Editor Integration](https://prettier.io/docs/editors)
+
 ESLint: [Integrations](https://eslint.org/docs/latest/use/integrations)
