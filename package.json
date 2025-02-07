@@ -19,10 +19,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": [
-    "packages/*"
+    "packages/frontend",
+    "packages/backend"
   ],
   "devDependencies": {
     "nodemon": "^3.1.9",
-    "prettier": "3.4.2"
+    "prettier": "^3.4.2"
+  },
+  "dependencies": {
+    "eslint": "^9.19.0",
+    "sass": "^1.84.0",
+    "scss": "^0.2.4"
   }
 }
