@@ -14,22 +14,32 @@ function addUser(user) {
 
 /**
  * Finds an existing user in the DB
- * @param {number} id 
+ * @param {number} id - Unique user id
  */
 function findUser(id) {
     return userModel.findById(id);
 }
 
 /**
+ * Deletes all suggestions associated with a given user
+ * NOTE: This should only be called when deleting a user from the DB
+ * @param {number} userId - User ID associated with suggestion(s)
+ */
+function removeSuggestions(userId) {
+    return suggestionModel.deleteMany({ "user": userId });
+}
+
+/**
  * Removes a user from the DB
- * @param {number} id 
+ * @param {number} id - Unique user ID
  */
 function removeUser(id) {
+    removeSuggestions(id);
     return userModel.findByIdAndDelete(id);
 }
 
 /**
- * 
+ * Saves a new suggestions to the DB
  * @param {JSON} suggestion - Instance of a suggestion
  */
 function addSuggestion(suggestion) {
