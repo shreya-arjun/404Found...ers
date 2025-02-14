@@ -21,7 +21,10 @@ export default function Home({
           }}>
           Logout
         </button>
-        <button className="sidebarButton">
+        <button className="sidebarButton"
+          onClick={() => {
+            EmotionRecognitionService.identifyEmotions()
+          }}>
           New Suggestion
         </button>
       </section>
@@ -29,7 +32,7 @@ export default function Home({
         <div className="homePageTitle">
           <h1>Tune/In</h1>
         </div>
-        <div className="homePageBody">
+        <div className="suggestionContainer">
           
         </div>
       </section>
