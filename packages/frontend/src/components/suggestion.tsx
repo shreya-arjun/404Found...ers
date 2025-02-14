@@ -1,8 +1,17 @@
 
-export default function Suggestion({prop}) {
-    return (
-        <div key={prop.id} className="">
+export interface ActionButtonProps {
+  imagePath: string;
+  text: string;
+  action: VoidFunction;
+  style?: ActionButtonStyling;
+}
 
+const Suggestion : React.FC<ActionButtonProps> = () => {
+    return (
+        <div className="suggestionContainer">
+            
         </div>
     )
 }
+
+export default Suggestion;
