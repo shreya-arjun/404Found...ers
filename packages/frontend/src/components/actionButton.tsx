@@ -4,7 +4,7 @@ import "../styling/actionButton.sass";
 export interface ActionButtonProps {
   imagePath: string;
   text: string;
-  action: CallableFunction;
+  action: VoidFunction;
   style?: ActionButtonStyling;
 }
 
@@ -46,9 +46,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     <button
       style={buttonStyle}
       className="actionButton"
-      onClick={() => {
-        action(true);
-      }}>
+      onClick={action}>
       <img className="actionImage" src={imagePath} alt="Action Button" />
       <p className="actionText">{text}</p>
     </button>

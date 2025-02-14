@@ -1,0 +1,52 @@
+$color-start:rgb(27, 1, 40);
+$color-end: black; 
+
+.pageContainer {
+    display:flex;
+}
+
+.homePageSidebar {
+    display: flex;
+    flex-direction: column;
+    margin:10px;
+    border:1px solid white;
+    border-radius: 5px;
+    width:300px;
+    align-items: center;
+    height: 95vh;
+    background-color: rgb(17, 0, 25);
+}
+
+.homePageSidebar > * {
+    margin: 10px 0;
+}
+
+.accountInfo {
+    display:flex;
+    color:white;
+    align-items: center;
+    padding:10px 0;
+    width:100%;
+}
+
+.accountInfo > * {
+    padding: 0 10px;
+    font-family: Verdana;
+    font-weight: 100;
+}
+
+.accountPFP {
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+}
+
+.sidebarButton {
+    width:50%;
+    background-color: rgb(37, 1, 55);
+    padding:10px;
+    border: 1px solid white;
+    border-radius: 2px;
+    color:white;
+
+}
