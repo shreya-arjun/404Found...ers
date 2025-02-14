@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styling/home.scss";
 
 export default function Home({
   setLoggedIn,
@@ -8,14 +9,30 @@ export default function Home({
   const [newRequestButton, toggleNewRequestButton] = useState(false);
 
   return (
-    <>
-      <>Home Page</>
-      <button
-        onClick={() => {
-          setLoggedIn(false);
-        }}>
-        Logout
-      </button>
-    </>
+    <div className="pageContainer">
+      <section className="homePageSidebar">
+        <div className="accountInfo">
+          <img className="accountPFP" src="/default_user.png" alt="default pfp" />
+          <h3 className="accountUsername">Spotify Username</h3>
+        </div>
+        <button className="sidebarButton"
+          onClick={() => {
+            setLoggedIn(false);
+          }}>
+          Logout
+        </button>
+        <button className="sidebarButton">
+          New Suggestion
+        </button>
+      </section>
+      <section className="homePageBody">
+        <div className="homePageTitle">
+          <h1>Tune/In</h1>
+        </div>
+        <div className="homePageBody">
+          
+        </div>
+      </section>
+    </div>
   );
 }
