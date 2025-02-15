@@ -1,12 +1,10 @@
 import ActionButton from "../components/actionButton";
 import "../styling/login.scss";
 import { SpotifyLoginService } from "../services/spotifyLoginService";
+import { useNavigate } from "react-router-dom";
 
-export default function Login({
-  setLoggedIn,
-}: {
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function Login() {
+  const navigate = useNavigate();
 
   return (
     <div className="loginContainer">
@@ -15,9 +13,8 @@ export default function Login({
         <ActionButton
           action={() => {
             SpotifyLoginService.logUserIn().then((result) => {
-              console.log(result);
-              setLoggedIn(true)
-            })
+              navigate("/home");
+            });
           }}
           imagePath="/spotify_logo.png"
           text="Login With Spotify"

@@ -1,14 +1,14 @@
-import { useState } from "react";
 import Home from "./home";
 import Login from "./login";
 import "../styling/index.sass";
+import { Route, Routes } from "react-router-dom";
 
 export default function Index() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
 
-  return isLoggedIn ? (
-    <Home setLoggedIn={setLoggedIn} />
-  ) : (
-    <Login setLoggedIn={setLoggedIn} />
-  );
+  return (
+    <Routes> 
+      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Login />} />
+    </Routes>
+  )
 }

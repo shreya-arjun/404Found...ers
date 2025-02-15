@@ -1,7 +1,7 @@
 
-class EmotionRecognitionService {
+export class EmotionRecognitionService {
 
     public static async identifyEmotion() {
-
+        
     }
 }
