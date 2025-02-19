@@ -20,6 +20,16 @@ function findUser(spotifyId) {
 }
 
 /**
+ * Finds suggestions corresponding with a user
+ * @param {number} spotifyId - Spotify ID associated with a user
+ */
+function findSuggestions(spotifyId) {
+    return User.findById(spotifyId)
+    .populate("suggestions") 
+    .then(user.suggestions); 
+}
+
+/**
  * Deletes all suggestions associated with a given user
  * NOTE: This should only be called when deleting a user from the DB
  * @param {number} spotifyId - User associated with suggestion(s)
@@ -42,7 +52,16 @@ function removeUser(spotifyId) {
  * @param {JSON} suggestion - Instance of a suggestion
  */
 function addSuggestion(suggestion) {
+    // May need to reformat suggestion depending on how JSON is formatted from getSuggestions
     const thisSuggestion = new Suggestion(suggestion);
     const promise = thisSuggestion.save();
     return promise
+}
+
+export default {
+    addUser,
+    findUser,
+    removeUser,
+    addSuggestion,
+    findSuggestions
 }
