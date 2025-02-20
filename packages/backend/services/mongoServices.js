@@ -4,12 +4,12 @@ import suggestionModel from "../models/suggestion";
 
 /**
  * Saves a new user to the DB
- * @param {JSON} user 
+ * @param {JSON} user
  */
 function addUser(user) {
-    const thisUser = new userModel(user);
-    const promise = thisUser.save();
-    return promise
+  const thisUser = new userModel(user);
+  const promise = thisUser.save();
+  return promise;
 }
 
 /**
@@ -17,7 +17,7 @@ function addUser(user) {
  * @param {number} id - Unique user id
  */
 function findUser(id) {
-    return userModel.findById(id);
+  return userModel.findById(id);
 }
 
 /**
@@ -26,7 +26,7 @@ function findUser(id) {
  * @param {number} userId - User ID associated with suggestion(s)
  */
 function removeSuggestions(userId) {
-    return suggestionModel.deleteMany({ "user": userId });
+  return suggestionModel.deleteMany({ user: userId });
 }
 
 /**
@@ -34,8 +34,8 @@ function removeSuggestions(userId) {
  * @param {number} id - Unique user ID
  */
 function removeUser(id) {
-    removeSuggestions(id);
-    return userModel.findByIdAndDelete(id);
+  removeSuggestions(id);
+  return userModel.findByIdAndDelete(id);
 }
 
 /**
@@ -43,7 +43,7 @@ function removeUser(id) {
  * @param {JSON} suggestion - Instance of a suggestion
  */
 function addSuggestion(suggestion) {
-    const thisSuggestion = new suggestionModel(suggestion);
-    const promise = thisSuggestion.save();
-    return promise
+  const thisSuggestion = new suggestionModel(suggestion);
+  const promise = thisSuggestion.save();
+  return promise;
 }

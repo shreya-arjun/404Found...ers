@@ -1,0 +1,42 @@
+$hover-color: rgb(55, 3, 81);
+
+.suggestionElement {
+    color:white;
+    font-family: Verdana;
+    font-size: small;
+    font-weight: 100;
+}
+
+.suggestionContainer {
+    display:flex;
+    flex-direction: column;
+}
+
+.suggestionRow {
+    display:flex;
+    align-items: center;
+    margin:5px 0;
+    cursor: pointer;
+}
+
+.suggestionRow:hover {
+    background-color: $hover-color;
+    border-radius: 10px;
+}
+
+#name {
+    width:10vw;
+    text-align: center;
+}
+
+#emotion {
+    width: 20vw;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+#tracks {
+    width:38vw;
+    text-align: left;
+    text-overflow: ellipsis;
+}

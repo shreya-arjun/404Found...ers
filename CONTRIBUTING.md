@@ -18,14 +18,14 @@
 ## Scripts
 
 Formatting and linting rules are also defined in the top-level .prettierrc and
-workspace-specific eslint.config.js files. This repository contains a few 
-scripts to simplify styling your code before you commit. 
+workspace-specific eslint.config.js files. This repository contains a few
+scripts to simplify styling your code before you commit.
 
-To lint the current workspace: ```npm run lint```
+To lint the current workspace: `npm run lint`
 
-To format the current workspace: ```npm run format```
+To format the current workspace: `npm run format`
 
-You can also use ```npm run style``` to run both of the above scripts.
+You can also use `npm run style` to run both of the above scripts.
 
 ## Editor Integration
 

@@ -43,10 +43,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   const buttonStyle = { ...defaultActionButtonStyling, ...(style || {}) }; // Merge default and provided styles
 
   return (
-    <button
-      style={buttonStyle}
-      className="actionButton"
-      onClick={action}>
+    <button style={buttonStyle} className="actionButton" onClick={action}>
       <img className="actionImage" src={imagePath} alt="Action Button" />
       <p className="actionText">{text}</p>
     </button>
