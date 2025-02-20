@@ -1,16 +1,98 @@
 import { useEffect, useState } from "react";
 import "../styling/home.scss";
-import { EmotionRecognitionService } from "../services/emotionRecognitionService";
-import { UserDataService } from "../services/userDataService";
+//import { UserDataService } from "../services/userDataService";
 import { useNavigate } from "react-router-dom";
-import Suggestion from "../components/suggestion";
-import Track from "../components/track";
+import {SuggestionInterface } from "../components/suggestion";
 import { ComponentMapper } from "../services/componentMapper";
+import "../styling/suggestionComponent.scss";
+import Sidebar from "../components/sidebar";
+
+const fakePreviousSuggestions = {
+  suggestions: [
+    {
+      mood: "Anger",
+      name: "1",
+      id: "randomId",
+      dateSuggested: "2/24/25",
+      tracks: [
+        {
+          title: "Master Of Puppets",
+          album: "Remastered Deluxe Box Set",
+          artist: "Metallica",
+          coverImage: "/default_cover.png",
+        },
+        {
+          title: "Master Of Puppets",
+          album: "Remastered Deluxe Box Set",
+          artist: "Metallica",
+          coverImage: "/default_cover.png",
+        },
+        {
+          title: "Master Of Puppets",
+          album: "Remastered Deluxe Box Set",
+          artist: "Metallica",
+          coverImage: "/default_cover.png",
+        },
+      ],
+    },
+    {
+      mood: "Happiness",
+      name: "2",
+      id: "randomId",
+      dateSuggested: "2/24/25",
+      tracks: [
+        {
+          title: "What You Know",
+          album: "Tourist History",
+          artist: "Two Door Cinema Club",
+          coverImage: "/default_cover.png",
+        },
+        {
+          title: "What You Know",
+          album: "Tourist History",
+          artist: "Two Door Cinema Club",
+          coverImage: "/default_cover.png",
+        },
+        {
+          title: "What You Know",
+          album: "Tourist History",
+          artist: "Two Door Cinema Club",
+          coverImage: "/default_cover.png",
+        },
+      ],
+    },
+    {
+      mood: "Sadness",
+      name: "3",
+      id: "randomId",
+      dateSuggested: "2/24/25",
+      tracks: [
+        {
+          title: "Another Love",
+          album: "Long Way Down",
+          artist: "Tom Odell",
+          coverImage: "/default_cover.png",
+        },
+        {
+          title: "Another Love",
+          album: "Long Way Down",
+          artist: "Tom Odell",
+          coverImage: "/default_cover.png",
+        },
+        {
+          title: "Another Love",
+          album: "Long Way Down",
+          artist: "Tom Odell",
+          coverImage: "/default_cover.png",
+        },
+      ],
+    },
+  ],
+};
 
 export default function Home() {
-  const [newRequestButton, toggleNewRequestButton] = useState(false);
-  const [previousUserSuggestions, setPreviousUserSuggestions] = useState([]);
-  const [userAccountData, setUserAccountData] = useState([]);
+  const [previousUserSuggestions, setPreviousUserSuggestions] = useState<SuggestionInterface[]>();
+  //const [userAccountData, setUserAccountData] = useState([]);
 
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -20,16 +102,15 @@ export default function Home() {
       navigate("/");
     }
     const fetchPreviousSuggestions = async () => {
-      const previousSuggestions =
-        await UserDataService.fetchPreviousSuggestions();
-      const suggestionComponents = ComponentMapper.mapSuggestions(previousSuggestions);
-      //setPreviousUserSuggestions(suggestionComponents);
+      //const previousSuggestions =
+      //  await UserDataService.fetchPreviousSuggestions();
+      setPreviousUserSuggestions(fakePreviousSuggestions.suggestions);
     };
 
-    const fetchUserAccountData = async () => {
-      const userAccountData = await UserDataService.fetchUserAccountData();
-    };
-    //fetchPreviousSuggestions();
+    // const fetchUserAccountData = async () => {
+    //   const userAccountData = await UserDataService.fetchUserAccountData();
+    // };
+    fetchPreviousSuggestions();
     //UserDataService.getUserName
 
     //mapper functions
@@ -37,48 +118,32 @@ export default function Home() {
 
   return (
     <div className="pageContainer">
-      <section className="homePageSidebar">
-        <div className="accountInfo" onClick={() => {
-          navigate("/account");
-        }}>
-          <img
-            className="accountPFP"
-            src="/default_user.png"
-            alt="default pfp"
-          />
-          <h3 className="accountUsername">Spotify Username</h3>
-        </div>
-
-        <button
-          className="sidebarButton"
-          onClick={() => {
-            localStorage.setItem("isLoggedIn", "false");
-            console.log("false");
-            navigate("/");
-          }}>
-          Logout
-        </button>
-
-        <button
-          className="sidebarButton"
-          onClick={() => {
-            navigate("/suggestion");
-          }}>
-          New Suggestion
-        </button>
-      </section>
+      <Sidebar />
       <section className="homePageBody">
         <div className="homePageTitleContainer">
           <h1 className="title">Tune/In</h1>
         </div>
 
         <div className="suggestionContainer">
-          <Suggestion suggestionId="id" suggestionName="#" dateSuggested="MM/DD/YYYY" basedOn={"Emotion"} tracks={[]}/>
+          <div className="titleRow">
+            <h2 id="name" className="suggestionElement">
+              #
+            </h2>
+            <h2 id="emotion" className="suggestionElement">
+              Emotion
+            </h2>
+            <h2 id="tracks" className="suggestionElement">
+              Tracks
+            </h2>
+            <h2 id="date" className="suggestionElement">
+              Date Suggested
+            </h2>
+          </div>
           <div className="space"></div>
-          <Suggestion suggestionId="id" suggestionName="1" dateSuggested="2/19/2025" basedOn={"Happiness"} tracks={[]}/>
-          <Suggestion suggestionId="id" suggestionName="2" dateSuggested="2/18/2025" basedOn={"Boredom"} tracks={[]}/>
-          <Suggestion suggestionId="id" suggestionName="3" dateSuggested="2/17/2025" basedOn={"Energetic"} tracks={[]}/>
-
+          {
+            ComponentMapper.mapSuggestions(previousUserSuggestions)
+          }
+          
         </div>
       </section>
     </div>
