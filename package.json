@@ -27,13 +27,15 @@
   ],
   "devDependencies": {
     "nodemon": "^3.1.9",
-    "prettier": "^3.4.2"
+    "prettier": "^3.5.1",
+    "vite": "^6.1.0"
   },
   "dependencies": {
-    "eslint": "^9.19.0",
+    "eslint": "^9.20.1",
     "react": "^19.0.0",
     "react-router-dom": "^6.29.0",
-    "sass": "^1.84.0",
-    "scss": "^0.2.4"
+    "sass": "^1.85.0",
+    "scss": "^0.2.4",
+    "typescript": "^5.7.3"
   }
 }
