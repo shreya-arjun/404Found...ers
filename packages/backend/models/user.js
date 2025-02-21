@@ -5,10 +5,15 @@ const SuggestionSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    track: {
+    track: {  // Assuming track is a Spotify track ID
         type: String, 
         required: true 
-    } // Assuming track is a Spotify track ID
+    },
+    user: {  
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', // ref to the User model
+        required: true
+    }
 }); 
 
 const UserSchema = new mongoose.Schema({

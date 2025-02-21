@@ -46,4 +46,7 @@ function addSuggestion(suggestion) {
     const thisSuggestion = new suggestionModel(suggestion);
     const promise = thisSuggestion.save();
     return promise
-}
+} 
+
+
+
