@@ -26,4 +26,3 @@ class EmotionRecognitionService {
 }
 
 export default EmotionRecognitionService;
->>>>>>> ella-emotion
