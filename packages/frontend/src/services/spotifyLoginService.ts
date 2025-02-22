@@ -10,21 +10,6 @@ const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 export class SpotifyLoginService {
   public static async logUserIn(): number {
-    // if an access token already exists, skip signup process.
-    // if it has expired, it will be refreshed upon the first API request.
-    if (localStorage.getItem("spotify_access_token") === null) {
-      await SpotifyLoginService.signUserUp();
-    }
-
-    // begin the PKCE Flow
-    localStorage.setItem("isLoggedIn", "true");
-    console.log("true");
-    return "logged in";
-    // at the end, add user token and user name to local storage
-    return 3;
-  }
-
-  public static async signUserUp() {
     const redirectUri = "http://localhost:5173";
     const scope = "user-top-read";
     const authUrl = new URL("https://accounts.spotify.com/authorize");
@@ -32,10 +17,11 @@ export class SpotifyLoginService {
     // begin the PKCE Flow
 
     // generate a random authorization code
-    const authVerifier = generateRandomStr(64);
+    const authVerifier = SpotifyLoginService.generateRandomStr(64);
     window.localStorage.setItem("spotify_auth_verifier", authVerifier);
     // generate an authorization challenge from the above code
-    const authChallenge = base64encode(await sha256(authVerifier));
+    const authChallenge = SpotifyLoginService
+      .base64encode(await SpotifyLoginService.sha256(authVerifier));
 
     // request authorization from Spotify
     const authParams = {
@@ -48,13 +34,16 @@ export class SpotifyLoginService {
     }
 
     // send authorization request
-    authUrl.search = new URLSearchParams(params).toString();
+    authUrl.search = new URLSearchParams(authParams).toString();
 
     // send user to the Spotify authorization page
     window.location.href = authUrl.toString();
+
+    return 3;
   }
 
   public static async getAccessToken(code: string): string {
+    console.log("getting access token");
     const authVerifier = localStorage.getItem("spotify_auth_verifier");
 
     const url = "https://accounts.spotify.com/api/token";
@@ -76,6 +65,8 @@ export class SpotifyLoginService {
     const response = await body.json();
 
     localStorage.setItem("spotify_access_token", response.access_token);
+    localStorage.setItem("spotify_refresh_token", response.refresh_token);
+    localStorage.setItem("isLoggedIn", "true");
   }
 
   public static async refreshAccessToken() {
@@ -83,14 +74,13 @@ export class SpotifyLoginService {
   }
 
   private static generateRandomStr(length: number): string {
-    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-      abcdefghijklmnopqrstuvwxyz\
-      0123456789_.-~";
-    const values = crypto.getRandomValues(new Uint8Array(length));
-    return values.reduce((acc, x) => {
-      return acc + SpotifyLoginService
-        .CODE_CHARSET[x % SpotifyLoginService.CODE_CHARSET.length], ""
-    });
+    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      + "abcdefghijklmnopqrstuvwxyz"
+      + "0123456789_.-~";
+    const randValues = crypto.getRandomValues(new Uint8Array(length));
+    return randValues.reduce((acc, x) => {
+      return acc + charset[x % charset.length]
+    }, "");
   }
 
   private static async sha256(plaintext: string): string {
