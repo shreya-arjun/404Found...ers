@@ -28,4 +28,3 @@ export default function Suggestion() {
     }, 3000);
   };
 }
->>>>>>> ella-emotion
