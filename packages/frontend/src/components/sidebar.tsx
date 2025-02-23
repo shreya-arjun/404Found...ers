@@ -1,39 +1,69 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { UserInterface } from "../services/userDataService";
+//import { UserDataService } from "../services/userDataService";
+
+const fakeAccountData = {
+  userProfileImage: "/olivia_rodrigo.png",
+  username: "Olivia Rodrigo",
+  spotifyUserId: "abc123def456ghi789",
+};
+
+
 
 export default function Sidebar() {
   const navigate = useNavigate();
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const [userAccountData, setUserAccountData] = useState<UserInterface>({
+    userProfileImage: "default_user.png",
+    username: "Fetching Username...",
+    spotifyUserId: "userid",
+  });
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/");
+    }
+    const fetchUserAccountData = async () => {
+      //const userAccountData = await UserDataService.fetchUserAccountData();
+      setUserAccountData(fakeAccountData);
+    };
+    fetchUserAccountData();
+  }, []);
+
   return (
     <section className="homePageSidebar">
-        <div
+      <div
           className="accountInfo"
           onClick={() => {
             navigate("/account");
           }}>
           <img
             className="accountPFP"
-            src="/default_user.png"
+            src={userAccountData.userProfileImage}
             alt="default pfp"
           />
-          <h3 className="accountUsername">Spotify Username</h3>
+          <h3 className="accountUsername">{userAccountData.username}</h3>
         </div>
 
-        <button
-          className="sidebarButton"
-          onClick={() => {
-            localStorage.setItem("isLoggedIn", "false");
-            console.log("false");
-            navigate("/");
-          }}>
-          Logout
-        </button>
+      <button
+        className="sidebarButton"
+        onClick={() => {
+          localStorage.setItem("isLoggedIn", "false");
+          console.log("false");
+          navigate("/");
+        }}>
+        Logout
+      </button>
 
-        <button
-          className="sidebarButton"
-          onClick={() => {
-            navigate("/suggestion");
-          }}>
-          New Suggestion
-        </button>
-      </section>
+      <button
+        className="sidebarButton"
+        onClick={() => {
+          navigate("/suggestion");
+        }}>
+        New Suggestion
+      </button>
+    </section>
   );
 }

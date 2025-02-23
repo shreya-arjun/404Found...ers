@@ -1,6 +1,3 @@
-import express from "express";
-import cors from "cors";
-import { User } from "./User";
 
 const clientId = "08d7a2df00bd4b64b86be0839bcf858a";
 const redirectUri = "http://localhost:5173";
@@ -9,7 +6,7 @@ const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 
 export class SpotifyLoginService {
-  public static async logUserIn(): number {
+  public static async logUserIn() {
     const redirectUri = "http://localhost:5173";
     const scope = "user-top-read";
     const authUrl = new URL("https://accounts.spotify.com/authorize");
@@ -38,8 +35,6 @@ export class SpotifyLoginService {
 
     // send user to the Spotify authorization page
     window.location.href = authUrl.toString();
-
-    return 3;
   }
 
   public static async getAccessToken(code: string): string {

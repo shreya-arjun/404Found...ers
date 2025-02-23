@@ -92,7 +92,6 @@ const fakePreviousSuggestions = {
 
 export default function Home() {
   const [previousUserSuggestions, setPreviousUserSuggestions] = useState<SuggestionInterface[]>();
-  //const [userAccountData, setUserAccountData] = useState([]);
 
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
