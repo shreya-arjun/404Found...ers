@@ -9,11 +9,9 @@ const videoConstraints = {
 };
 
 export default function Suggestion() {
-  const [isCaptureEnable, setCaptureEnable] = useState(false);
+  const [isCaptureEnable, setCaptureEnable] = useState(true);
   const [url, setUrl] = useState<string | null>(null);
   const webcamRef = useRef<Webcam>(null);
-
-  // USE useEffect TO RUN startWebcam
 
   // Captures screenshots from webcam
   const capture = useCallback(() => {
@@ -34,6 +32,13 @@ export default function Suggestion() {
       capture();
     }, 3000);
   };
+
+  // USE useEffect TO RUN startWebcam
+  useEffect(() => {
+    if(isCaptureEnable) {
+        startWebcam();
+    }
+  }, []);
 
   return (
     <div className="webcam">
