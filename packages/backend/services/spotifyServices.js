@@ -23,7 +23,7 @@ function getUserId(accessToken) {
 }
 
 /**
- * Gets the top 5 artists of a Spotify user
+ * Gets the top n artists of a Spotify user
  * @param {String} accessToken
  */
 function getTopArtists(accessToken) {
@@ -36,7 +36,7 @@ function getTopArtists(accessToken) {
     body: new URLSearchParams({
       type: "artists",
       time_range: "medium_term",
-      limit: "5",
+      limit: count,
     }),
   });
 
