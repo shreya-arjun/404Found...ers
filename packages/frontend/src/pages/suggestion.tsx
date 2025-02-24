@@ -16,6 +16,7 @@ export default function Suggestion() {
 
   // Captures screenshots from webcam
   const capture = useCallback(() => {
+    console.log("start capture");
     if (screenshotCaptured)
       return;
 
@@ -30,21 +31,24 @@ export default function Suggestion() {
 
   // Starts webcam for 3 seconds
   const startWebcam = () => {
+    console.log("start webcam");
+
     setTimeout(() => {
+      console.log("create capture");
       capture();
     }, 1500);
 
     setTimeout(() => {
       setCaptureEnable(false);
-    }, 3000)
+    }, 3000);
   };
 
   // Use useEffect to run startWebcam()
-  useEffect(() => {
-    if (isCaptureEnable) {
+  //useEffect(() => {
+    if(isCaptureEnable) {
       startWebcam();
     }
-  }, []);
+  //}, []);
 
   return (
     <div className="webcam">
