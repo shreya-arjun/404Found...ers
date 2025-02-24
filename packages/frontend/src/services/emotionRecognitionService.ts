@@ -20,6 +20,7 @@ class EmotionRecognitionService {
             // ISSUES:
             //      RUNS TWO JOBS???
             //      STOPS WORKING HERE
+            //      I don't think the image is being sent correctly
 
             // Get response
             const result = await client.expressionMeasurement.batch.getJobPredictions(response.jobId.toString());

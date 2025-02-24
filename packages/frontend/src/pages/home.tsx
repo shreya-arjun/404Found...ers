@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "../styling/home.scss";
-//import { UserDataService } from "../services/userDataService";
+// import { UserDataService } from "../services/userDataService";
 import { useNavigate } from "react-router-dom";
-import {SuggestionInterface } from "../components/suggestion";
+import { SuggestionInterface } from "../components/suggestion";
 import { ComponentMapper } from "../services/componentMapper";
 import "../styling/suggestionComponent.scss";
 import Sidebar from "../components/sidebar";
