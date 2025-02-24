@@ -55,7 +55,7 @@ function addSuggestion(suggestion) {
     // May need to reformat suggestion depending on how JSON is formatted from getSuggestions
     const thisSuggestion = new Suggestion(suggestion);
     const promise = thisSuggestion.save();
-    return promise
+    return promise;
 }
 
 export default {

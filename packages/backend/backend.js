@@ -10,15 +10,16 @@ const port = 8000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/new-suggestion", (req, res) => {
+app.get("/new-suggestion/:id", (req, res) => {
     const emotions = req.query.source.results.predictions.file.models.face.grouped_predictions.id.predictions.emotions;
+    const id = req.params["id"];
     const seed = generateSeed(emotions);
 
     // Send seed to spotify API
     suggestionServices
-    .getSuggestions(seed)
+    .getSuggestions(seed, emotions)
     .then((suggestion) => {
-      return mongoServices.addSuggestion(suggestion)
+      return mongoServices.addSuggestion(suggestion, id)
         .then(() => suggestion);
     })
     .then((suggestion) => res.send(suggestion));
