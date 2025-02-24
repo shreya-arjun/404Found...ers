@@ -12,28 +12,34 @@ export default function Suggestion() {
   const [isCaptureEnable, setCaptureEnable] = useState(true);
   const [url, setUrl] = useState<string | null>(null);
   const webcamRef = useRef<Webcam>(null);
+  const [screenshotCaptured, setScreenshotCaptured] = useState(false);
 
   // Captures screenshots from webcam
   const capture = useCallback(() => {
-    const imageSrc = webcamRef.current?.getScreenshot();
+    if (screenshotCaptured)
+      return;
 
+    const imageSrc = webcamRef.current?.getScreenshot();
+    
     if (imageSrc) {
       setUrl(imageSrc);
       emotionRecognitionService.identifyEmotion(imageSrc); // Sends image --> sent to Hume.ai
+      setScreenshotCaptured(true);
     }
-  }, [webcamRef]);
+  }, [webcamRef, screenshotCaptured]);
 
   // Starts webcam for 3 seconds
   const startWebcam = () => {
-    setCaptureEnable(true);
+    setTimeout(() => {
+      capture();
+    }, 1500);
 
     setTimeout(() => {
       setCaptureEnable(false);
-      capture();
-    }, 3000);
+    }, 3000)
   };
 
-  // USE useEffect TO RUN startWebcam
+  // Use useEffect to run startWebcam()
   useEffect(() => {
     if(isCaptureEnable) {
         startWebcam();

@@ -5,17 +5,25 @@ class EmotionRecognitionService {
     public static async identifyEmotion(imageSrc: string): Promise<void> {
         try {
             console.log("Processing image");
+            
+            const client = new HumeClient({ apiKey: "NyEnSqsDCJWluAYaBquATgHslcPB8Y0HC5T7mkfN0JiUp0SR" });
+            console.log("Create client");
 
             // Send to Hume.ai
-            //const client = new HumeClient({ apiKey: "NyEnSqsDCJWluAYaBquATgHslcPB8Y0HC5T7mkfN0JiUp0SR" });
-            /*await client.expressionMeasurement.batch.startInferenceJob({
+            const response = await client.expressionMeasurement.batch.startInferenceJob({
                 urls: [imageSrc],
                 notify: true
-            });*/
+            });
+
+            console.log(response.jobId);
+            
+            // ISSUES:
+            //      RUNS TWO JOBS???
+            //      STOPS WORKING HERE
 
             // Get response
-            // await client.expressionMeasurement.batch.getJobPredictions("job_id");
-            
+            const result = await client.expressionMeasurement.batch.getJobPredictions(response.jobId.toString());
+            console.log("Response: ", result);
 
             // Send to backend
             
