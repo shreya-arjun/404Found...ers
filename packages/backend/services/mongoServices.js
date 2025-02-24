@@ -51,11 +51,25 @@ function removeUser(spotifyId) {
  * Saves a new suggestions to the DB
  * @param {JSON} suggestion - Instance of a suggestion
  */
-function addSuggestion(suggestion) {
-    // May need to reformat suggestion depending on how JSON is formatted from getSuggestions
-    const thisSuggestion = new Suggestion(suggestion);
-    const promise = thisSuggestion.save();
-    return promise
+function addSuggestion(suggestion, spotifyId) {
+    return findUser(spotifyId).then(user => {
+        if (!user) { 
+            throw new Error("User not found");
+        }
+
+        const thisSuggestion = new Suggestion({
+            mood: suggestion.mood,
+            name: suggestion.name,
+            id: suggestion.id,
+            dateSuggested: new Date(suggestion.dateSuggested),
+            tracks: suggestion.tracks
+        });
+
+        return thisSuggestion.save().then(savedSuggestion => {
+            user.suggestions.push(savedSuggestion._id);
+            return user.save().then(() => savedSuggestion);
+        });
+    });
 }
 
 export default {
