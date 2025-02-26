@@ -15,15 +15,18 @@ export default function Suggestion() {
   const [screenshotCaptured, setScreenshotCaptured] = useState(false);
 
   // Captures screenshots from webcam
-  const capture = useCallback(() => {
+  const capture = useCallback(async () => {
     console.log("start capture");
     if (screenshotCaptured)
       return;
 
     const imageSrc = webcamRef.current?.getScreenshot();
     
+    // To do: Send to firebase
+
     if (imageSrc) {
       setUrl(imageSrc);
+      console.log(imageSrc);
       emotionRecognitionService.identifyEmotion(imageSrc); // Sends image --> sent to Hume.ai
       setScreenshotCaptured(true);
     }
