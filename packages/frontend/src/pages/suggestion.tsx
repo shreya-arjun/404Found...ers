@@ -20,16 +20,20 @@ export default function Suggestion() {
     if (screenshotCaptured)
       return;
 
+    // Captures screenshot
     const imageSrc = webcamRef.current?.getScreenshot();
     
-    // To do: Upload to mongo --> send through backend? or can backend send it back to the frontend?
-    // backend sending to frontend will probably be easier but backend sending to api would be more secure...
+    // TO-DO:
+    // Convert image to public url
 
     if (imageSrc) {
       setUrl(imageSrc);
       console.log(imageSrc);
+
+      // Using online image with public URL for now to test API
       emotionRecognitionService.identifyEmotion("https://thumbs.dreamstime.com/b/winner-happy-woman-success-12804815.jpg")
-      //emotionRecognitionService.identifyEmotion(imageSrc); // Sends image --> sent to Hume.ai
+
+      //emotionRecognitionService.identifyEmotion(imageSrc);
       setScreenshotCaptured(true);
     }
   }, [webcamRef, screenshotCaptured]);
@@ -38,17 +42,19 @@ export default function Suggestion() {
   const startWebcam = () => {
     console.log("start webcam");
 
+    // Captures image 1.5 seconds into webcam being open
     setTimeout(() => {
       console.log("create capture");
       capture();
     }, 1500);
 
+    // Turns camera off after 3 seconds
     setTimeout(() => {
       setCaptureEnable(false);
     }, 3000);
   };
 
-  // Use useEffect to run startWebcam()
+  // Use useEffect to run startWebcam()...???
   //useEffect(() => {
     if(isCaptureEnable) {
       startWebcam();
