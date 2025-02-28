@@ -11,11 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/new-suggestion", (req, res) => {
-    const emotions = req.query.source.results.predictions.file.models.face.grouped_predictions.id.predictions.emotions;
-    const seed = generateSeed(emotions);
+  const spotifyToken = req.query.spotify_token;
+  const emotions = req.query.source.results.predictions.file.models.face.grouped_predictions.id.predictions.emotions;
+  const seed = generateSeed(emotions);
 
-    // Send seed to spotify API
-    suggestionServices
+  // Send seed to spotify API
+  suggestionServices
     .getSuggestions(seed)
     .then((suggestion) => {
       return mongoServices.addSuggestion(suggestion)
@@ -29,8 +30,8 @@ app.get("/suggestions/:id", (req, res) => {
   const id = req.params["id"];
 
   mongoServices
-  .findSuggestions(id)
-  .then((result) => res.send(result));
+    .findSuggestions(id)
+    .then((result) => res.send(result));
 });
 
 // Get user info from Spotify and send to frontend
@@ -46,8 +47,8 @@ app.delete("/user/:id", (req, res) => {
   const id = req.params["id"];
   mongoServices
   // removeUser calls removeSuggestions in mongoServices so shouldn't have to worry about deleting suggestions here
-  .removeUser(id)
-  .then((_) => res.status(204).send(`Deleted user with id: ${id}`));
+    .removeUser(id)
+    .then((_) => res.status(204).send(`Deleted user with id: ${id}`));
 });
 
 app.listen(port, () => {
