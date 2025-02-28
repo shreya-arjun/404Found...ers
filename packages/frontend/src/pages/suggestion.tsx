@@ -27,7 +27,8 @@ export default function Suggestion() {
     if (imageSrc) {
       setUrl(imageSrc);
       console.log(imageSrc);
-      emotionRecognitionService.identifyEmotion(imageSrc); // Sends image --> sent to Hume.ai
+      emotionRecognitionService.identifyEmotion("https://thumbs.dreamstime.com/b/winner-happy-woman-success-12804815.jpg")
+      //emotionRecognitionService.identifyEmotion(imageSrc); // Sends image --> sent to Hume.ai
       setScreenshotCaptured(true);
     }
   }, [webcamRef, screenshotCaptured]);
