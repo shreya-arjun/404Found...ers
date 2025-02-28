@@ -16,7 +16,7 @@ class EmotionRecognitionService {
             });
 
             console.log(response.jobId);
-            
+
             // ISSUES:
             //      RUNS TWO JOBS???
             //      STOPS WORKING HERE
