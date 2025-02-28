@@ -22,7 +22,8 @@ export default function Suggestion() {
 
     const imageSrc = webcamRef.current?.getScreenshot();
     
-    // To do: Send to firebase
+    // To do: Upload to mongo --> send through backend? or can backend send it back to the frontend?
+    // backend sending to frontend will probably be easier but backend sending to api would be more secure...
 
     if (imageSrc) {
       setUrl(imageSrc);
