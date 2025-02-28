@@ -72,6 +72,11 @@ function addSuggestion(suggestion, spotifyId) {
     });
 }
 
+/**
+ * Gets image from DB
+ */
+function 
+
 export default {
     addUser,
     findUser,
