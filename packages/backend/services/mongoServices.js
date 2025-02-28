@@ -12,11 +12,18 @@ function addUser(user) {
 }
 
 /**
- * Finds an existing user in the DB
+ * Finds an existing user in the DB, if user w/ spotifyID DNE in Mongo, Add user instance and return 
  * @param {number} spotifyId - Spotify ID associated with a user
  */
-function findUser(spotifyId) {
-    return User.findById(spotifyId);
+async function findUser(spotifyId) {
+    let user = await User.findById(spotifyId);
+    if (!user) {
+        user = await addUser({
+            spotifyId: spotifyId,
+            suggestions: []
+        });
+    }
+    return user
 }
 
 /**

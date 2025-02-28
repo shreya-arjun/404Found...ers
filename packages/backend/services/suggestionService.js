@@ -8,14 +8,6 @@ function getMainEmotion(emotion) {
 }
 
 /**
- * Creates string of current date in MM/DD/YYYY format
- */
-function getDate() {
-    const date = new Date();
-    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-}
-
-/**
  * Gets track suggestions from Spotify Web API
  * @param {JSON} seed - Target values for danceability, energy, speechiness, and valence
  */
@@ -28,7 +20,7 @@ function getSuggestions(seed, emotion) {
         mood: getMainEmotion(emotion),
         name: 'placeholder',
         id: 'placeholder',
-        dateSuggested: getDate(),
+        dateSuggested: new Date(),
         tracks : []
     }
 }

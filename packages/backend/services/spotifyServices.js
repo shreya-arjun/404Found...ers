@@ -47,3 +47,5 @@ function getTopArtists(accessToken) {
   }
   return userData.items;
 }
+
+export default { getUserId }

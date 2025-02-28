@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 import generateSeed from "./services/generateSeed.js"
 import mongoServices from "./services/mongoServices.js"
-import suggestionServices from "./servies/suggestionService.js";
+import suggestionServices from "./services/suggestionService.js";
+import getUserId from "./services/spotifyServices.js";
 
 dotenv.config();
 
@@ -10,9 +11,9 @@ const port = 8000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/new-suggestion/:id", (req, res) => {
+app.get("/new-suggestion/:token", (req, res) => {
     const emotions = req.query.source.results.predictions.file.models.face.grouped_predictions.id.predictions.emotions;
-    const id = req.params["id"];
+    const id = getUserId(req.params["token"]);
     const seed = generateSeed(emotions);
 
     // Send seed to spotify API
@@ -26,8 +27,8 @@ app.get("/new-suggestion/:id", (req, res) => {
 });
 
 // Get previous suggestions from DB
-app.get("/suggestions/:id", (req, res) => {
-  const id = req.params["id"];
+app.get("/suggestions/:token", (req, res) => {
+  const id = getUserId(req.params["token"]);
 
   mongoServices
   .findSuggestions(id)
@@ -35,16 +36,16 @@ app.get("/suggestions/:id", (req, res) => {
 });
 
 // Get user info from Spotify and send to frontend
-app.get("/user/:id", (req, res) => {
-  const id = req.params["id"];
+app.get("/user/:token", (req, res) => {
+  const id = getUserId(req.params["token"]);
   
   // TODO: Request profile picture and username from spotify, send to frontend
 
 });
 
 // Delete user from DB
-app.delete("/user/:id", (req, res) => {
-  const id = req.params["id"];
+app.delete("/user/:token", (req, res) => {
+  const id = getUserId(req.params["token"]);
   mongoServices
   // removeUser calls removeSuggestions in mongoServices so shouldn't have to worry about deleting suggestions here
   .removeUser(id)
