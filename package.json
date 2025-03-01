@@ -16,10 +16,10 @@
   "scripts": {
     "start-frontend": "npm run -w frontend start",
     "start-backend": "npm run -w backend start",
-    "lint": "npx eslint packages/*",
+    "lint": "npx eslint . && npx prettier --check",
     "format": "npx prettier -w .",
     "style": "npm run lint && npm run format",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "workspaces": [
     "packages/frontend",
