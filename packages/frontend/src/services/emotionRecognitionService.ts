@@ -65,6 +65,7 @@ class EmotionRecognitionService {
             // Send to backend
             // Public URL
             // Add comments & remove console.logs
+            // Hide API key
             
         } catch (error) {
             console.error("Error processing image", error);
