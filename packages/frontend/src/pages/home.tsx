@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../styling/home.scss";
 //import { UserDataService } from "../services/userDataService";
 import { useNavigate } from "react-router-dom";
-import {SuggestionInterface } from "../components/suggestion";
+import { SuggestionInterface } from "../components/suggestion";
 import { ComponentMapper } from "../services/componentMapper";
 import "../styling/suggestionComponent.scss";
 import Sidebar from "../components/sidebar";
@@ -91,7 +91,8 @@ const fakePreviousSuggestions = {
 };
 
 export default function Home() {
-  const [previousUserSuggestions, setPreviousUserSuggestions] = useState<SuggestionInterface[]>();
+  const [previousUserSuggestions, setPreviousUserSuggestions] =
+    useState<SuggestionInterface[]>();
   //const [userAccountData, setUserAccountData] = useState([]);
 
   const navigate = useNavigate();
@@ -140,10 +141,7 @@ export default function Home() {
             </h2>
           </div>
           <div className="space"></div>
-          {
-            ComponentMapper.mapSuggestions(previousUserSuggestions)
-          }
-          
+          {ComponentMapper.mapSuggestions(previousUserSuggestions)}
         </div>
       </section>
     </div>

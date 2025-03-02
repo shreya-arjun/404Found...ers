@@ -35,8 +35,8 @@ export default function Suggestion() {
 
   // USE useEffect TO RUN startWebcam
   useEffect(() => {
-    if(isCaptureEnable) {
-        startWebcam();
+    if (isCaptureEnable) {
+      startWebcam();
     }
   }, []);
 

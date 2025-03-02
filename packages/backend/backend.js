@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import generateSeed from "./services/generateSeed.js"
-import mongoServices from "./services/mongoServices.js"
+import generateSeed from "./services/generateSeed.js";
+import mongoServices from "./services/mongoServices.js";
 import suggestionServices from "./servies/suggestionService.js";
 
 dotenv.config();
@@ -11,15 +11,16 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/new-suggestion", (req, res) => {
-    const emotions = req.query.source.results.predictions.file.models.face.grouped_predictions.id.predictions.emotions;
-    const seed = generateSeed(emotions);
+  const emotions =
+    req.query.source.results.predictions.file.models.face.grouped_predictions.id
+      .predictions.emotions;
+  const seed = generateSeed(emotions);
 
-    // Send seed to spotify API
-    suggestionServices
+  // Send seed to spotify API
+  suggestionServices
     .getSuggestions(seed)
     .then((suggestion) => {
-      return mongoServices.addSuggestion(suggestion)
-        .then(() => suggestion);
+      return mongoServices.addSuggestion(suggestion).then(() => suggestion);
     })
     .then((suggestion) => res.send(suggestion));
 });
@@ -28,26 +29,23 @@ app.get("/new-suggestion", (req, res) => {
 app.get("/suggestions/:id", (req, res) => {
   const id = req.params["id"];
 
-  mongoServices
-  .findSuggestions(id)
-  .then((result) => res.send(result));
+  mongoServices.findSuggestions(id).then((result) => res.send(result));
 });
 
 // Get user info from Spotify and send to frontend
 app.get("/user/:id", (req, res) => {
   const id = req.params["id"];
-  
-  // TODO: Request profile picture and username from spotify, send to frontend
 
+  // TODO: Request profile picture and username from spotify, send to frontend
 });
 
 // Delete user from DB
 app.delete("/user/:id", (req, res) => {
   const id = req.params["id"];
   mongoServices
-  // removeUser calls removeSuggestions in mongoServices so shouldn't have to worry about deleting suggestions here
-  .removeUser(id)
-  .then((_) => res.status(204).send(`Deleted user with id: ${id}`));
+    // removeUser calls removeSuggestions in mongoServices so shouldn't have to worry about deleting suggestions here
+    .removeUser(id)
+    .then((_) => res.status(204).send(`Deleted user with id: ${id}`));
 });
 
 app.listen(port, () => {

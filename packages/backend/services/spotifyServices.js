@@ -10,7 +10,7 @@ async function getUserId(accessToken) {
 
   const response = await fetch(url, {
     headers: {
-      "Authorization": "Bearer " + accessToken
+      Authorization: "Bearer " + accessToken,
     },
   });
 
@@ -31,7 +31,7 @@ async function getTopArtists(accessToken) {
 
   const response = await fetch(url, {
     headers: {
-      "Authorization": "Bearer " + accessToken
+      Authorization: "Bearer " + accessToken,
     },
     body: new URLSearchParams({
       type: "artists",

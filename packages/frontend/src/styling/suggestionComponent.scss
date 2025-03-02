@@ -1,41 +1,42 @@
 $hover-color: rgb(55, 3, 81);
 
 .suggestionElement {
-    color:white;
-    font-family: Verdana;
-    font-size: small;
-    font-weight: 100;
+  color: white;
+  font-family: Verdana;
+  font-size: small;
+  font-weight: 100;
 }
 
-.suggestionContainer, .trackContainer {
-    display:flex;
-    flex-direction: column;
+.suggestionContainer,
+.trackContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .suggestionRow {
-    display:flex;
-    align-items: center;
-    margin:5px 0;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  cursor: pointer;
 }
 
 .suggestionRow:hover {
-    background-color: $hover-color;
-    border-radius: 10px;
+  background-color: $hover-color;
+  border-radius: 10px;
 }
 
 #name {
-    width:10vw;
-    text-align: center;
+  width: 10vw;
+  text-align: center;
 }
 
 #emotion {
-    width: 20vw;
-    text-align: left;
+  width: 20vw;
+  text-align: left;
 }
 
 #tracks {
-    width:38vw;
-    text-align: left;
-    text-overflow: ellipsis;
+  width: 38vw;
+  text-align: left;
+  text-overflow: ellipsis;
 }
