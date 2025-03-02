@@ -94,24 +94,6 @@ export class SpotifyLoginService {
     }
   }
 
-  public static async getUsername(): string {
-    const accessToken = localStorage.getItem("spotify_access_token");
-    const url = "https://api.spotify.com/v1/me";
-
-    const response = await fetch(url, {
-      headers: {
-        "Authorization": "Bearer " + accessToken
-      },
-    });
-
-    const userData = await response.json();
-    
-    if (userData.error) {
-      return -1;
-    }
-    return userData.display_name;
-  }
-
   private static generateRandomStr(length: number): string {
     const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
       + "abcdefghijklmnopqrstuvwxyz"
