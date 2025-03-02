@@ -1,11 +1,13 @@
-import express from "express";
-import cors from "cors";
-import { User } from "./User";
+// Ella commented this out to get CI running (it doesn't work with unused variables)
+// import express from "express";
+//import cors from "cors";
+//import { User } from "./User";
 
 const clientId = "08d7a2df00bd4b64b86be0839bcf858a";
 const redirectUri = "http://localhost:5173";
-const scope = "user-top-read";
-const authUrl = new URL("https://accounts.spotify.com/authorize");
+// Ella commented this out to get CI running (it doesn't work with unused variables)
+// const scope = "user-top-read";
+// const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 export class SpotifyLoginService {
   public static async logUserIn(): number {
