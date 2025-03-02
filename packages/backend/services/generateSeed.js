@@ -1,4 +1,5 @@
 import assert from 'assert';
+import { findPackageJSON } from 'module';
 
 /**
  * Finds a users score for a given emotion
@@ -59,23 +60,4 @@ function generateSeed(emotions) {
     }
 }
 
-// TEST
-const testEmotions = [
-  {'name': 'Anger', 'score': 0.1},
-  {'name': 'Anxiety', 'score': 0.2},
-  {'name': 'Boredom', 'score': 0.6},
-  {'name': 'Calmness', 'score': 0.4},
-  {'name': 'Concentration', 'score': 0.1},
-  {'name': 'Joy', 'score': 0.3},
-  {'name': 'Romance', 'score': 0.1},
-  {'name': 'Excitement', 'score': 0.2}
-];
-
-const result = generateSeed(testEmotions);
-
-assert.ok(result.hasOwnProperty("target_danceability"));
-assert.ok(result.hasOwnProperty("target_energy"));
-assert.ok(result.hasOwnProperty("target_speechiness"));
-assert.ok(result.hasOwnProperty("target_valence"));
-
-console.log(result);
+export { findScore, getMeasure, generateSeed };

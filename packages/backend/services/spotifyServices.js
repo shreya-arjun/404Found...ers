@@ -5,7 +5,7 @@ import cors from "cors";
  * Gets the Spotify user ID of a user
  * @param {String} accessToken
  */
-function getUserId(accessToken) {
+async function getUserId(accessToken) {
   const url = "https://api.spotify.com/v1/me";
 
   const response = await fetch(url, {
@@ -26,7 +26,7 @@ function getUserId(accessToken) {
  * Gets the top n artists of a Spotify user
  * @param {String} accessToken
  */
-function getTopArtists(accessToken) {
+async function getTopArtists(accessToken) {
   const url = "https://api.spotify.com/v1/me/top/artists";
 
   const response = await fetch(url, {
@@ -48,4 +48,4 @@ function getTopArtists(accessToken) {
   return userData.items;
 }
 
-export default { getUserId }
+export {getUserId, getTopArtists};

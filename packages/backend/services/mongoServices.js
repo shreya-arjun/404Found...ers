@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { User, Suggestion } from "./models/user.js";
+import { User, Suggestion } from "../models/user.js";
 
 /**
  * Saves a new user to the DB
@@ -33,7 +33,7 @@ async function findUser(spotifyId) {
 function findSuggestions(spotifyId) {
     return User.findById(spotifyId)
     .populate("suggestions") 
-    .then(user.suggestions); 
+    .then(user => user.suggestions); 
 }
 
 /**
@@ -65,7 +65,7 @@ function addSuggestion(suggestion) {
     return promise;
 }
 
-export default {
+export {
     addUser,
     findUser,
     removeUser,

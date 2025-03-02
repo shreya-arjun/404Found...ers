@@ -25,6 +25,6 @@ function getSuggestions(seed, emotion) {
     }
 }
 
-export default {
-    getSuggestions
+export {
+    getSuggestions, getMainEmotion
 }
