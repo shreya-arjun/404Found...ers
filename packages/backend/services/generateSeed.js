@@ -79,3 +79,5 @@ assert.ok(result.hasOwnProperty("target_speechiness"));
 assert.ok(result.hasOwnProperty("target_valence"));
 
 console.log(result);
+
+export {generateSeed}

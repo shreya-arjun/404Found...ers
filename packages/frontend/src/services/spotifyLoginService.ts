@@ -9,7 +9,7 @@ const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 
 export class SpotifyLoginService {
-  public static async logUserIn(): number {
+  public static async logUserIn() {
     const redirectUri = "http://localhost:5173";
     const scope = "user-top-read";
     const authUrl = new URL("https://accounts.spotify.com/authorize");
@@ -42,7 +42,7 @@ export class SpotifyLoginService {
     return 3;
   }
 
-  public static async getAccessToken(code: string): string {
+  public static async getAccessToken(code: string) {
     console.log("getting access token");
     const authVerifier = localStorage.getItem("spotify_auth_verifier");
 
@@ -122,7 +122,7 @@ export class SpotifyLoginService {
     }, "");
   }
 
-  private static async sha256(plaintext: string): string {
+  private static async sha256(plaintext: string) {
     const encoder = new TextEncoder();
     const data = encoder.encode(plaintext);
     return window.crypto.subtle.digest("SHA-256", data);

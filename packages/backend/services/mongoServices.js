@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { User, Suggestion } from "./models/user.js";
+import { User, Suggestion } from "../models/user.js";
+
 
 /**
  * Saves a new user to the DB

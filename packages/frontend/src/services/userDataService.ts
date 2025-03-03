@@ -1,7 +1,9 @@
 export class UserDataService {
   public static async fetchPreviousSuggestions(): Promise<any> {
+    const access_token = localStorage.getItem("spotify_access_token");
+
     try {
-      const response = await fetch("previousUserSuggestionRoute");
+      const response = await fetch(`http://localhost:8000/suggestions/${access_token}`);
       if (!response.ok) {
         throw new Error(`HTTP Error | Status: ${response.status}`);
       }
@@ -12,8 +14,9 @@ export class UserDataService {
   }
 
   public static async fetchUserAccountData(): Promise<any> {
+    const access_token = localStorage.getItem("spotify_access_token");
     try {
-      const response = await fetch("previousUserAccountDataRoute");
+      const response = await fetch(`http://localhost:8000/user/${access_token}`);
       if (!response.ok) {
         throw new Error(`HTTP Error | Status: ${response.status}`);
       }

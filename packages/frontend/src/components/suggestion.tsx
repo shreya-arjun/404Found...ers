@@ -11,7 +11,7 @@ export interface SuggestionInterface {
   mood: string;
   name: string;
   id: string;
-  dateSuggested: string;
+  dateSuggested: Date;
   tracks: {
     title: string;
     album: string;
@@ -21,22 +21,22 @@ export interface SuggestionInterface {
 }
 
 const Suggestion: React.FC<SuggestionInterface> = ({
-    id,
-    name,
-    dateSuggested,
-    mood,
-    tracks,
+  id,
+  name,
+  dateSuggested,
+  mood,
+  tracks,
 }) => {
-    const trackString = tracks.map((track) => track.title).join(", ");
+  const trackString = tracks.map((track) => track.title).join(", ");
 
-    const [trackDisplay, setTrackDisplay] = useState(false);
-    const [suggestedTracks, setSuggestedTracks] = useState<TrackInterface[]>();
+  const [trackDisplay, setTrackDisplay] = useState(false);
+  const [suggestedTracks, setSuggestedTracks] = useState<TrackInterface[]>();
 
-    useEffect(() => {
-        setSuggestedTracks(tracks);
-    }, []);
-    return (
-        <div id={id}
+  useEffect(() => {
+    setSuggestedTracks(tracks);
+  }, []);
+  return (
+    <div id={id}
       className="suggestionContainer"
       onClick={() => {
         setTrackDisplay(!trackDisplay);
@@ -52,7 +52,9 @@ const Suggestion: React.FC<SuggestionInterface> = ({
           {trackString}
         </h2>
         <h2 id="date" className="suggestionElement">
-          {dateSuggested}
+          {
+            `${String(dateSuggested.getMonth() + 1).padStart(2, "0")}/${String(dateSuggested.getDate()).padStart(2, "0")}/${String(dateSuggested.getFullYear()).slice(-2)}`
+          }
         </h2>
       </div>
       <div className="trackContainer">
