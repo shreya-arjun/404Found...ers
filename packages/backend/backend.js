@@ -1,7 +1,9 @@
 import dotenv from "dotenv";
-import generateSeed from "./services/generateSeed.js";
-import mongoServices from "./services/mongoServices.js";
-import suggestionServices from "./servies/suggestionService.js";
+import express from "express";
+import cors from "cors";
+import generateSeed from "./services/generateSeed.js"
+import mongoServices from "./services/mongoServices.js"
+import suggestionServices from "./services/suggestionService.js";
 
 dotenv.config();
 
@@ -11,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/new-suggestion", (req, res) => {
+  const spotifyToken = req.query.spotify_token;
   const emotions =
     req.query.source.results.predictions.file.models.face.grouped_predictions.id
       .predictions.emotions;
@@ -18,7 +21,7 @@ app.get("/new-suggestion", (req, res) => {
 
   // Send seed to spotify API
   suggestionServices
-    .getSuggestions(seed)
+    .getSuggestions(spotifyToken, seed)
     .then((suggestion) => {
       return mongoServices.addSuggestion(suggestion).then(() => suggestion);
     })
@@ -29,7 +32,9 @@ app.get("/new-suggestion", (req, res) => {
 app.get("/suggestions/:id", (req, res) => {
   const id = req.params["id"];
 
-  mongoServices.findSuggestions(id).then((result) => res.send(result));
+  mongoServices
+    .findSuggestions(id)
+    .then((result) => res.send(result));
 });
 
 // Get user info from Spotify and send to frontend
