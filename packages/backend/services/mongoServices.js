@@ -15,6 +15,7 @@ function addUser(user) {
  * Finds an existing user in the DB, if user w/ spotifyID DNE in Mongo, Add user instance and return
  * @param {number} spotifyId - Spotify ID associated with a user
  */
+<<<<<<< HEAD
 async function findUser(spotifyId) {
   let user = await User.findById(spotifyId);
   if (!user) {
@@ -24,6 +25,10 @@ async function findUser(spotifyId) {
     });
   }
   return user;
+=======
+function findUser(spotifyId) {
+  return User.findById(spotifyId);
+>>>>>>> origin/main
 }
 
 /**
@@ -33,7 +38,11 @@ async function findUser(spotifyId) {
 function findSuggestions(spotifyId) {
   return User.findById(spotifyId)
     .populate("suggestions")
+<<<<<<< HEAD
     .then((user) => user.suggestions);
+=======
+    .then(user.suggestions);
+>>>>>>> origin/main
 }
 
 /**
@@ -58,6 +67,7 @@ function removeUser(spotifyId) {
  * Saves a new suggestions to the DB
  * @param {JSON} suggestion - Instance of a suggestion
  */
+<<<<<<< HEAD
 function addSuggestion(suggestion) {
   // May need to reformat suggestion depending on how JSON is formatted from getSuggestions
   const thisSuggestion = new Suggestion(suggestion);
@@ -66,3 +76,33 @@ function addSuggestion(suggestion) {
 }
 
 export { addUser, findUser, removeUser, addSuggestion, findSuggestions };
+=======
+function addSuggestion(suggestion, spotifyId) {
+  return findUser(spotifyId).then((user) => {
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const thisSuggestion = new Suggestion({
+      mood: suggestion.mood,
+      name: suggestion.name,
+      id: suggestion.id,
+      dateSuggested: new Date(suggestion.dateSuggested),
+      tracks: suggestion.tracks,
+    });
+
+    return thisSuggestion.save().then((savedSuggestion) => {
+      user.suggestions.push(savedSuggestion._id);
+      return user.save().then(() => savedSuggestion);
+    });
+  });
+}
+
+export default {
+  addUser,
+  findUser,
+  removeUser,
+  addSuggestion,
+  findSuggestions,
+};
+>>>>>>> origin/main

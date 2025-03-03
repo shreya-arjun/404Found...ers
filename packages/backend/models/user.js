@@ -1,18 +1,44 @@
 import mongoose from "mongoose";
 
+const TrackSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  album: {
+    type: String,
+    required: true,
+  },
+  artist: {
+    type: String,
+    required: true,
+  },
+  coverImage: {
+    type: String,
+    default: "/default_cover.png",
+  },
+});
+
 const SuggestionSchema = new mongoose.Schema({
   mood: {
     type: String,
     required: true,
   },
-  track: {
-    // Assuming track is a Spotify track ID
+  name: {
     type: String,
     required: true,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // ref to the User model
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  dateSuggested: {
+    type: Date,
+    required: true,
+  },
+  tracks: {
+    type: [TrackSchema],
     required: true,
   },
 });
