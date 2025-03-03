@@ -27,6 +27,19 @@ export class UserDataService {
       console.error(`Error while fetching suggestions | Code: ${error}`);
     }
   }
+
+  public static async deleteUser(): Promise<any> {
+    const access_token = localStorage.getItem("spotify_access_token");
+    try {
+      const response = await fetch(`http://localhost:8000/user/${access_token}`, {method: 'DELETE'});
+      if (!response.ok) {
+        throw new Error(`HTTP Error | Status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(`Error while fetching suggestions | Code: ${error}`);
+    }
+  }
 }
 
 export interface UserInterface {

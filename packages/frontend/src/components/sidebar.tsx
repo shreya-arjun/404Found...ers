@@ -9,9 +9,7 @@ const fakeAccountData = {
   spotifyUserId: "abc123def456ghi789",
 };
 
-
 import { UserDataService } from "../services/userDataService";
-
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -22,6 +20,14 @@ export default function Sidebar() {
     username: "Fetching Username...",
     spotifyUserId: "userid",
   });
+
+  const handleAccountDeletion = () => {
+    UserDataService.deleteUser().then((result) => {
+      if (result) {
+        navigate("/")
+      }
+    })
+  }
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -64,6 +70,11 @@ export default function Sidebar() {
           navigate("/suggestion");
         }}>
         New Suggestion
+      </button>
+      <button
+        className="sidebarButton"
+        onClick={handleAccountDeletion}>
+        Delete Account
       </button>
     </section>
   );
