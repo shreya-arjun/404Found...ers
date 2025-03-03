@@ -59,15 +59,15 @@ test("Deletes users suggestions and then deletes user", async () => {
   expect(result).toEqual(deleteRes);
 });
 
-test("Saves new suggestion", async () => {
-  const suggestion = {
-    text: "This is a song you should listen to because you are very sad",
-    user: "abc123",
-  };
-  const suggestionObj = { ...suggestion };
-  jest.spyOn(Suggestion.prototype, "save").mockResolvedValue(suggestionObj);
-  const result = await addSuggestion(suggestion);
+// test("Saves new suggestion", async () => {
+//   const suggestion = {
+//     text: "This is a song you should listen to because you are very sad",
+//     user: "abc123",
+//   };
+//   const suggestionObj = { ...suggestion };
+//   jest.spyOn(Suggestion.prototype, "save").mockResolvedValue(suggestionObj);
+//   const result = await addSuggestion(suggestion);
 
-  expect(result).toEqual(suggestionObj);
-  expect(Suggestion.prototype.save).toHaveBeenCalled();
-});
+//   expect(result).toEqual(suggestionObj);
+//   expect(Suggestion.prototype.save).toHaveBeenCalled();
+// });

@@ -50,6 +50,6 @@ async function getSuggestions(accessToken, songParams) {
   return responseData;
 }
 
-export default {
+export {
   getSuggestions, getMainEmotion
 };
