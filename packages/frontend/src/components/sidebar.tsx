@@ -48,7 +48,6 @@ export default function Sidebar() {
         />
         <h3 className="accountUsername">{userAccountData.username}</h3>
       </div>
-
       <button
         className="sidebarButton"
         onClick={() => {

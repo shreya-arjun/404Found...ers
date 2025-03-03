@@ -1,4 +1,4 @@
-import assert from 'assert';
+import assert from "assert";
 
 /**
  * Finds a users score for a given emotion
@@ -7,7 +7,7 @@ import assert from 'assert';
  * @returns {number} - A score 0-1
  */
 function findScore(emotions, emotion) {
-    return (emotions.find(x => x.name == emotion)).score;
+  return emotions.find((x) => x.name == emotion).score;
 }
 
 /**
@@ -42,42 +42,42 @@ function generateSeed(emotions) {
     findScore(emotions, "Excitement"),
   ];
 
-    // Fiddle with these weights to tune suggestions
-    // [anger, anxiety, boredom, calmness, concentration, joy, romance, excitement]
-    const weights = {
-        "danceability": [0.7, 0.7, 0.1, 0.65, 0.95, 0.8, 0.9, 0.5],
-        "energy": [1.0, 0.15, 0.8, 0.1, 0.35, 0.4, 0.4, 0.4],
-        "speechiness": [0.5, 0.15, 0.4, 0.35, 0.05, 0.35, 0.4, 0.45],
-        "valence": [0.15, 0.85, 0.7, 0.65, 0.5, 0.95, 0.9, 0.95]
-    };
- 
-    return {
-        "target_danceability": getMeasure(weights["danceability"], scoreArr),
-        "target_energy": getMeasure(weights["energy"], scoreArr),
-        "target_speechiness": getMeasure(weights["speechiness"], scoreArr),
-        "target_valence": getMeasure(weights["valence"], scoreArr)
-    }
+  // Fiddle with these weights to tune suggestions
+  // [anger, anxiety, boredom, calmness, concentration, joy, romance, excitement]
+  const weights = {
+    danceability: [0.7, 0.7, 0.1, 0.65, 0.95, 0.8, 0.9, 0.5],
+    energy: [1.0, 0.15, 0.8, 0.1, 0.35, 0.4, 0.4, 0.4],
+    speechiness: [0.5, 0.15, 0.4, 0.35, 0.05, 0.35, 0.4, 0.45],
+    valence: [0.15, 0.85, 0.7, 0.65, 0.5, 0.95, 0.9, 0.95],
+  };
+
+  return {
+    danceability: getMeasure(weights["danceability"], scoreArr),
+    energy: getMeasure(weights["energy"], scoreArr),
+    speechiness: getMeasure(weights["speechiness"], scoreArr),
+    valence: getMeasure(weights["valence"], scoreArr),
+  };
 }
+
+export default generateSeed;
 
 // TEST
 const testEmotions = [
-    {'name': 'Anger', 'score': 0.1},
-    {'name': 'Anxiety', 'score': 0.2},
-    {'name': 'Boredom', 'score': 0.6},
-    {'name': 'Calmness', 'score': 0.4},
-    {'name': 'Concentration', 'score': 0.1},
-    {'name': 'Joy', 'score': 0.3},
-    {'name': 'Romance', 'score': 0.1},
-    {'name': 'Excitement', 'score': 0.2}
-  ];
+  { name: "Anger", score: 0.1 },
+  { name: "Anxiety", score: 0.2 },
+  { name: "Boredom", score: 0.6 },
+  { name: "Calmness", score: 0.4 },
+  { name: "Concentration", score: 0.1 },
+  { name: "Joy", score: 0.3 },
+  { name: "Romance", score: 0.1 },
+  { name: "Excitement", score: 0.2 },
+];
 
 const result = generateSeed(testEmotions);
 
-assert.ok(result.hasOwnProperty("target_danceability"));
-assert.ok(result.hasOwnProperty("target_energy"));
-assert.ok(result.hasOwnProperty("target_speechiness"));
-assert.ok(result.hasOwnProperty("target_valence"));
+assert.ok(result.hasOwnProperty("danceability"));
+assert.ok(result.hasOwnProperty("energy"));
+assert.ok(result.hasOwnProperty("speechiness"));
+assert.ok(result.hasOwnProperty("valence"));
 
 console.log(result);
-
-export {generateSeed}

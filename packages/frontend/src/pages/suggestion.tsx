@@ -10,7 +10,7 @@ const videoConstraints = {
 
 export default function Suggestion() {
   const [isCaptureEnable, setCaptureEnable] = useState(true);
-  const [url, setUrl] = useState<string | null>(null);
+  // const [url, setUrl] = useState<string | null>(null);
   const webcamRef = useRef<Webcam>(null);
 
   // Captures screenshots from webcam
@@ -18,7 +18,7 @@ export default function Suggestion() {
     const imageSrc = webcamRef.current?.getScreenshot();
 
     if (imageSrc) {
-      setUrl(imageSrc);
+      // setUrl(imageSrc);
       emotionRecognitionService.identifyEmotion(imageSrc); // Sends image --> sent to Hume.ai
     }
   }, [webcamRef]);
@@ -35,8 +35,8 @@ export default function Suggestion() {
 
   // USE useEffect TO RUN startWebcam
   useEffect(() => {
-    if(isCaptureEnable) {
-        startWebcam();
+    if (isCaptureEnable) {
+      startWebcam();
     }
   }, []);
 

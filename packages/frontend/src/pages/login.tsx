@@ -1,19 +1,22 @@
 import ActionButton from "../components/actionButton";
 import "../styling/login.scss";
 import { SpotifyLoginService } from "../services/spotifyLoginService";
-import { useEffect } from "react";
+// Ella commented this out to get CI running (it doesn't work with unused variables)
+// import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "true") {
-      document.location = "home";
-    }
+  // Ella commented this out to get CI running (it doesn't work with unused variables)
+  // const navigate = useNavigate();
 
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("code")) {
-      SpotifyLoginService.getAccessToken(urlParams.get("code"));
-    }
-  }, []);
+  if (localStorage.getItem("isLoggedIn") === "true") {
+    document.location = "home";
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get("code");
+  if (!(code === null)) {
+    SpotifyLoginService.getAccessToken(code);
+  }
 
   return (
     <div className="loginContainer">

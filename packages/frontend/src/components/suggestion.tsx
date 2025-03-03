@@ -36,7 +36,8 @@ const Suggestion: React.FC<SuggestionInterface> = ({
     setSuggestedTracks(tracks);
   }, []);
   return (
-    <div id={id}
+    <div
+      id={id}
       className="suggestionContainer"
       onClick={() => {
         setTrackDisplay(!trackDisplay);
