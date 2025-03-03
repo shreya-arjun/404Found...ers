@@ -1,3 +1,5 @@
+import { SuggestionInterface } from "../components/suggestion";
+
 export class UserDataService {
   public static async fetchPreviousSuggestions(): Promise<any> {
     const access_token = localStorage.getItem("spotify_access_token");
@@ -25,4 +27,10 @@ export class UserDataService {
       console.error(`Error while fetching suggestions | Code: ${error}`);
     }
   }
+}
+
+export interface UserInterface {
+  userProfileImage: string;
+  username: string;
+  spotifyUserId: string;
 }
