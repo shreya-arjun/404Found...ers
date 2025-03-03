@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import generateSeed from "./services/generateSeed.js";
 import mongoServices from "./services/mongoServices.js";
 import suggestionServices from "./services/suggestionService.js";
-import fileSystem from "./services/fileSystem.js"
+import fileSystem from "./services/fileSystem.js";
 
 dotenv.config();
 

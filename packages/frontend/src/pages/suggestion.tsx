@@ -17,7 +17,12 @@ export default function Suggestion() {
   // Captures screenshots from webcam
   const capture = useCallback(async () => {
     console.log("start capture");
+<<<<<<< HEAD
     if (screenshotCaptured) return;
+=======
+    if (screenshotCaptured)
+      return;
+>>>>>>> refs/remotes/origin/ella-emotion
 
     // Captures screenshot
     const imageSrc = webcamRef.current?.getScreenshot();
@@ -26,7 +31,11 @@ export default function Suggestion() {
     // Convert image to public url
 
     if (imageSrc) {
+<<<<<<< HEAD
       // setUrl(imageSrc);
+=======
+      setUrl(imageSrc);
+>>>>>>> refs/remotes/origin/ella-emotion
       console.log(imageSrc);
 
       // Using online image with public URL for now to test API
@@ -55,9 +64,15 @@ export default function Suggestion() {
 
   // Use useEffect to run startWebcam()...???
   //useEffect(() => {
+<<<<<<< HEAD
   if (isCaptureEnable) {
     startWebcam();
   }
+=======
+    if(isCaptureEnable) {
+      startWebcam();
+    }
+>>>>>>> refs/remotes/origin/ella-emotion
   //}, []);
 
   return (
