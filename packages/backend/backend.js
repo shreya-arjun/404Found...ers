@@ -49,20 +49,6 @@ app.delete("/user/:id", (req, res) => {
     .then((_) => res.status(204).send(`Deleted user with id: ${id}`));
 });
 
-// Upload image
-app.post("/images", (req, res) => {
-  const { id, image } = req.body;
-
-  res.send(fileSystem.saveFile(image, id));
-});
-
-// get File from filesystem
-app.get("/images/:id", (req, res) => {
-  const { id } = req.body;
-
-  res.send(fileSystem.getFile(id));
-});
-
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
