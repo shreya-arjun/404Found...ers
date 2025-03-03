@@ -1,6 +1,3 @@
-import assert from 'assert';
-import { findPackageJSON } from 'module';
-
 /**
  * Finds a users score for a given emotion
  * @param {JSON} emotions - From Hume (or user form?)
@@ -8,7 +5,7 @@ import { findPackageJSON } from 'module';
  * @returns {number} - A score 0-1
  */
 function findScore(emotions, emotion) {
-    return (emotions.find(x => x.name == emotion)).score;
+  return emotions.find((x) => x.name == emotion).score;
 }
 
 /**
@@ -43,21 +40,21 @@ function generateSeed(emotions) {
     findScore(emotions, "Excitement"),
   ];
 
-    // Fiddle with these weights to tune suggestions
-    // [anger, anxiety, boredom, calmness, concentration, joy, romance, excitement]
-    const weights = {
-        "danceability": [0.7, 0.7, 0.1, 0.65, 0.95, 0.8, 0.9, 0.5],
-        "energy": [1.0, 0.15, 0.8, 0.1, 0.35, 0.4, 0.4, 0.4],
-        "speechiness": [0.5, 0.15, 0.4, 0.35, 0.05, 0.35, 0.4, 0.45],
-        "valence": [0.15, 0.85, 0.7, 0.65, 0.5, 0.95, 0.9, 0.95]
-    };
- 
-    return {
-        "target_danceability": getMeasure(weights["danceability"], scoreArr),
-        "target_energy": getMeasure(weights["energy"], scoreArr),
-        "target_speechiness": getMeasure(weights["speechiness"], scoreArr),
-        "target_valence": getMeasure(weights["valence"], scoreArr)
-    }
+  // Fiddle with these weights to tune suggestions
+  // [anger, anxiety, boredom, calmness, concentration, joy, romance, excitement]
+  const weights = {
+    danceability: [0.7, 0.7, 0.1, 0.65, 0.95, 0.8, 0.9, 0.5],
+    energy: [1.0, 0.15, 0.8, 0.1, 0.35, 0.4, 0.4, 0.4],
+    speechiness: [0.5, 0.15, 0.4, 0.35, 0.05, 0.35, 0.4, 0.45],
+    valence: [0.15, 0.85, 0.7, 0.65, 0.5, 0.95, 0.9, 0.95],
+  };
+
+  return {
+    target_danceability: getMeasure(weights["danceability"], scoreArr),
+    target_energy: getMeasure(weights["energy"], scoreArr),
+    target_speechiness: getMeasure(weights["speechiness"], scoreArr),
+    target_valence: getMeasure(weights["valence"], scoreArr),
+  };
 }
 
-export { findScore, getMeasure, generateSeed };
+export { findScore, generateSeed };

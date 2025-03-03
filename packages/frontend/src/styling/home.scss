@@ -9,8 +9,7 @@ $color-end: black;
   border-radius: 5px;
 }
 
-.pageContainer 
-{
+.pageContainer {
   display: flex;
 }
 
@@ -58,24 +57,23 @@ $color-end: black;
 .homePageBody {
   @include container;
   box-sizing: border-box;
-  width:100%;
+  width: 100%;
   background: linear-gradient(to bottom, $color-start, $color-end);
 }
 
 .title {
-  color:white;
-  font-size:xx-large;
+  color: white;
+  font-size: xx-large;
 }
 
 .space {
-  height:10px;
+  height: 10px;
   border-bottom: 1px solid white;
-
 }
 
 .titleRow {
-  display:flex;
+  display: flex;
   align-items: center;
-  margin:5px 0;
+  margin: 5px 0;
   cursor: pointer;
 }

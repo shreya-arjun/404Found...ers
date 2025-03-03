@@ -7,7 +7,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   if (localStorage.getItem("isLoggedIn") === "true") {
-    document.location = 'home';
+    document.location = "home";
   }
 
   const urlParams = new URLSearchParams(window.location.search);

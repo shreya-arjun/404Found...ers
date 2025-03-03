@@ -6,24 +6,24 @@ import { User, Suggestion } from "../models/user.js";
  * @param {JSON} user
  */
 function addUser(user) {
-    const thisUser = new User(user);
-    const promise = thisUser.save();
-    return promise
+  const thisUser = new User(user);
+  const promise = thisUser.save();
+  return promise;
 }
 
 /**
- * Finds an existing user in the DB, if user w/ spotifyID DNE in Mongo, Add user instance and return 
+ * Finds an existing user in the DB, if user w/ spotifyID DNE in Mongo, Add user instance and return
  * @param {number} spotifyId - Spotify ID associated with a user
  */
 async function findUser(spotifyId) {
-    let user = await User.findById(spotifyId);
-    if (!user) {
-        user = await addUser({
-            spotifyId: spotifyId,
-            suggestions: []
-        });
-    }
-    return user
+  let user = await User.findById(spotifyId);
+  if (!user) {
+    user = await addUser({
+      spotifyId: spotifyId,
+      suggestions: [],
+    });
+  }
+  return user;
 }
 
 /**
@@ -31,9 +31,9 @@ async function findUser(spotifyId) {
  * @param {number} spotifyId - Spotify ID associated with a user
  */
 function findSuggestions(spotifyId) {
-    return User.findById(spotifyId)
-    .populate("suggestions") 
-    .then(user => user.suggestions); 
+  return User.findById(spotifyId)
+    .populate("suggestions")
+    .then((user) => user.suggestions);
 }
 
 /**
@@ -42,7 +42,7 @@ function findSuggestions(spotifyId) {
  * @param {number} spotifyId - User associated with suggestion(s)
  */
 function removeSuggestions(spotifyId) {
-    return Suggestion.deleteMany({ "user": spotifyId });
+  return Suggestion.deleteMany({ user: spotifyId });
 }
 
 /**
@@ -50,8 +50,8 @@ function removeSuggestions(spotifyId) {
  * @param {number} spotifyId - Spotify ID associated with a user
  */
 function removeUser(spotifyId) {
-    removeSuggestions(spotifyId);
-    return User.findByIdAndDelete(spotifyId);
+  removeSuggestions(spotifyId);
+  return User.findByIdAndDelete(spotifyId);
 }
 
 /**
@@ -59,16 +59,10 @@ function removeUser(spotifyId) {
  * @param {JSON} suggestion - Instance of a suggestion
  */
 function addSuggestion(suggestion) {
-    // May need to reformat suggestion depending on how JSON is formatted from getSuggestions
-    const thisSuggestion = new Suggestion(suggestion);
-    const promise = thisSuggestion.save();
-    return promise;
+  // May need to reformat suggestion depending on how JSON is formatted from getSuggestions
+  const thisSuggestion = new Suggestion(suggestion);
+  const promise = thisSuggestion.save();
+  return promise;
 }
 
-export {
-    addUser,
-    findUser,
-    removeUser,
-    addSuggestion,
-    findSuggestions
-}
+export { addUser, findUser, removeUser, addSuggestion, findSuggestions };
