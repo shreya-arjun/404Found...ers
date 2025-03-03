@@ -26,7 +26,7 @@ async function getUserId(accessToken) {
  * @param   {Number}        count       The maximum number of returned tracks
  * @return  {Array<String>}             Array of Spotify track IDs
  */
-async function getTopTracks(accessToken, count) {
+async function getUserTopTracks(accessToken, count) {
   const url = "https://api.spotify.com/v1/me/top/tracks?";
 
   const response = await fetch(url + new URLSearchParams({
@@ -37,9 +37,6 @@ async function getTopTracks(accessToken, count) {
     headers: {
       Authorization: "Bearer " + accessToken,
     },
-    type: "tracks",
-    time_range: "medium_term",
-    limit: count,
   });
 
   const responseData = await response.json();
@@ -47,5 +44,5 @@ async function getTopTracks(accessToken, count) {
 }
 
 export default {
-  getUserId, getTopTracks
+  getUserId, getUserTopTracks
 }

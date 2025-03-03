@@ -21,7 +21,7 @@ app.get("/new-suggestion", (req, res) => {
 
   // Send seed to spotify API
   suggestionServices
-    .getSuggestions(seed)
+    .getSuggestions(spotifyToken, seed)
     .then((suggestion) => {
       return mongoServices.addSuggestion(suggestion).then(() => suggestion);
     })
