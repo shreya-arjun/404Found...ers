@@ -56,7 +56,7 @@ class EmotionRecognitionService {
                         console.error("Job failed.");
                         return;
                     }
-                    
+                
                     // Repolls every 3 seconds
                     await new Promise(resolve => setTimeout(resolve, 3000));
                 }
