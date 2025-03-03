@@ -126,8 +126,8 @@ app.get("/user/:token", (req, res) => {
   const token = req.params["token"];
 
   const fakeUserData = {
-    username: "test user",
-    imageURL: "/default_user.png"
+    username: "backend response",
+    userProfileImage: "/olivia_rodrigo.png"
   }
 
   res.status(200).send(fakeUserData);

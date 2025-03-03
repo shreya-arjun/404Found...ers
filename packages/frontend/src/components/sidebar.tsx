@@ -18,7 +18,7 @@ export default function Sidebar() {
 
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const [userAccountData, setUserAccountData] = useState<UserInterface>({
-    userProfileImage: "default_user.png",
+    userProfileImage: "/default_user.png",
     username: "Fetching Username...",
     spotifyUserId: "userid",
   });
@@ -28,28 +28,11 @@ export default function Sidebar() {
       navigate("/");
     }
     const fetchUserAccountData = async () => {
-      //const userAccountData = await UserDataService.fetchUserAccountData();
-      setUserAccountData(fakeAccountData);
+      const fetchedUserAccountData = await UserDataService.fetchUserAccountData();
+      setUserAccountData(fetchedUserAccountData);
     };
     fetchUserAccountData();
   }, []);
-
-
-  useEffect(() => {
-    const fetchAccountData = async () => {
-      const userAccountData = await UserDataService.fetchUserAccountData();
-      console.log("fetched data" + userAccountData)
-      console.log("after")
-
-      if (!userAccountData || !userAccountData.username) {
-        console.error("Invalid user data received, using fallback.");
-        setUserAccountData(userAccountData);
-      } else {
-        setUserAccountData(userAccountData);
-      }
-    }
-    fetchAccountData();
-  }, [])
 
   return (
     <section className="homePageSidebar">
