@@ -11,7 +11,7 @@ export default function Index() {
       <Route path="/home" element={<Home />} />
       <Route path="/" element={<Login />} />
       <Route path="/suggestion" element={<Suggestion />} />
-      <Route path="/account" element={<Account/>} />
+      <Route path="/account" element={<Account />} />
     </Routes>
   );
 }

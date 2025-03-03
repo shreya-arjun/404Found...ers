@@ -1,5 +1,5 @@
 export class UserDataService {
-  public static async fetchPreviousSuggestions(): Promise<any> {
+  public static async fetchPreviousSuggestions(): Promise<unknown> {
     try {
       const response = await fetch("previousUserSuggestionRoute");
       if (!response.ok) {
@@ -11,7 +11,7 @@ export class UserDataService {
     }
   }
 
-  public static async fetchUserAccountData(): Promise<any> {
+  public static async fetchUserAccountData(): Promise<unknown> {
     try {
       const response = await fetch("previousUserAccountDataRoute");
       if (!response.ok) {

@@ -1,12 +1,13 @@
-import express from "express";
-import cors from "cors";
-import { User } from "./User";
+// Ella commented this out to get CI running (it doesn't work with unused variables)
+// import express from "express";
+//import cors from "cors";
+//import { User } from "./User";
 
 const clientId = "08d7a2df00bd4b64b86be0839bcf858a";
 const redirectUri = "http://localhost:5173";
-const scope = "user-top-read";
-const authUrl = new URL("https://accounts.spotify.com/authorize");
-
+// Ella commented this out to get CI running (it doesn't work with unused variables)
+// const scope = "user-top-read";
+// const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 export class SpotifyLoginService {
   public static async logUserIn(): number {
@@ -20,8 +21,9 @@ export class SpotifyLoginService {
     const authVerifier = SpotifyLoginService.generateRandomStr(64);
     window.localStorage.setItem("spotify_auth_verifier", authVerifier);
     // generate an authorization challenge from the above code
-    const authChallenge = SpotifyLoginService
-      .base64encode(await SpotifyLoginService.sha256(authVerifier));
+    const authChallenge = SpotifyLoginService.base64encode(
+      await SpotifyLoginService.sha256(authVerifier),
+    );
 
     // request authorization from Spotify
     const authParams = {
@@ -31,7 +33,7 @@ export class SpotifyLoginService {
       code_challenge_method: "S256",
       code_challenge: authChallenge,
       redirect_uri: redirectUri,
-    }
+    };
 
     // send authorization request
     authUrl.search = new URLSearchParams(authParams).toString();
@@ -59,7 +61,7 @@ export class SpotifyLoginService {
         redirect_uri: redirectUri,
         code_verifier: authVerifier,
       }),
-    }
+    };
 
     const body = await fetch(url, payload);
     const response = await body.json();
@@ -83,7 +85,7 @@ export class SpotifyLoginService {
         refresh_token: refreshToken,
         client_id: clientId,
       }),
-    }
+    };
 
     const body = await fetch(url, payload);
     const response = await body.json();
@@ -94,13 +96,32 @@ export class SpotifyLoginService {
     }
   }
 
+  public static async getUsername(): string {
+    const accessToken = localStorage.getItem("spotify_access_token");
+    const url = "https://api.spotify.com/v1/me";
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    });
+
+    const userData = await response.json();
+
+    if (userData.error) {
+      return -1;
+    }
+    return userData.display_name;
+  }
+
   private static generateRandomStr(length: number): string {
-    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-      + "abcdefghijklmnopqrstuvwxyz"
-      + "0123456789_.-~";
+    const charset =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+      "abcdefghijklmnopqrstuvwxyz" +
+      "0123456789_.-~";
     const randValues = crypto.getRandomValues(new Uint8Array(length));
     return randValues.reduce((acc, x) => {
-      return acc + charset[x % charset.length]
+      return acc + charset[x % charset.length];
     }, "");
   }
 
@@ -109,7 +130,7 @@ export class SpotifyLoginService {
     const data = encoder.encode(plaintext);
     return window.crypto.subtle.digest("SHA-256", data);
   }
-  
+
   private static base64encode(input: string): string {
     return btoa(String.fromCharCode(...new Uint8Array(input)))
       .replace(/=/g, "")

@@ -14,9 +14,8 @@ const Track: React.FC<TrackInterface> = ({
   artist,
   coverImage,
 }) => {
-
   return (
-    <a className="trackRow" target="_blank" href="https://open.spotify.com/" >
+    <a className="trackRow" target="_blank" href="https://open.spotify.com/">
       <div className="coverImageWrapper">
         <img className="coverImage" src={coverImage} alt="Album Image" />
       </div>

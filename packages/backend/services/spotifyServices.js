@@ -8,7 +8,7 @@ async function getUserId(accessToken) {
 
   const response = await fetch(url, {
     headers: {
-      "Authorization": "Bearer " + accessToken
+      Authorization: "Bearer " + accessToken,
     },
   });
 
@@ -35,7 +35,7 @@ async function getTopTracks(accessToken, count) {
     limit: count,
   }), {
     headers: {
-      "Authorization": "Bearer " + accessToken
+      Authorization: "Bearer " + accessToken,
     },
     type: "tracks",
     time_range: "medium_term",

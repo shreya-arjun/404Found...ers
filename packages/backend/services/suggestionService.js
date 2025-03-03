@@ -21,11 +21,11 @@ async function getRecommendations(seed) {
 }
 
 /**
-  * Gets track suggestions from Spotify Web API
+  * Gets track suggestions from ReccoBeats API
   * @param   {String}  accessToken Spotify user's API access token
-  * @param   {JSON}  songParams  Target values for danceability, energy,
-  *                              speechiness, and valence
-  * @return  {Array<String>}            Comma-separated list of Spotify track IDs
+  * @param   {JSON}    songParams  Target values for danceability, energy,
+  *                                speechiness, and valence
+  * @return  {Array<String>}       Comma-separated list of Spotify track IDs
   */
 async function getSuggestions(accessToken, songParams) {
   // Get user's top tracks and add to seed
@@ -40,5 +40,5 @@ async function getSuggestions(accessToken, songParams) {
 }
 
 export default {
-  getSuggestions
-}
+  getSuggestions,
+};
