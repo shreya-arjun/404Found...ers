@@ -26,7 +26,7 @@ export default function Suggestion() {
     // Convert image to public url
 
     if (imageSrc) {
-      setUrl(imageSrc);
+      // setUrl(imageSrc);
       console.log(imageSrc);
 
       // Using online image with public URL for now to test API

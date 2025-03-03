@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 import generateSeed from "./services/generateSeed.js";
 import mongoServices from "./services/mongoServices.js";
-import suggestionServices from "./servies/suggestionService.js";
+import suggestionServices from "./services/suggestionService.js";
+import fileSystem from "./services/fileSystem.js"
 
 dotenv.config();
 
@@ -46,6 +47,20 @@ app.delete("/user/:id", (req, res) => {
     // removeUser calls removeSuggestions in mongoServices so shouldn't have to worry about deleting suggestions here
     .removeUser(id)
     .then((_) => res.status(204).send(`Deleted user with id: ${id}`));
+});
+
+// Upload image
+app.post("/images", (req, res) => {
+  const { id, image } = req.body;
+
+  res.send(fileSystem.saveFile(image, id));
+});
+
+// get File from filesystem
+app.get("/images/:id", (req, res) => {
+  const { id } = req.body;
+
+  res.send(fileSystem.getFile(id));
 });
 
 app.listen(port, () => {

@@ -20,7 +20,6 @@
     "format": "npx prettier -w .",
     "style": "npm run lint && npm run format",
     "test": "echo \"Error: no test specified\" && exit 1"
-    
   },
   "workspaces": [
     "packages/frontend",
@@ -34,10 +33,12 @@
     "vite": "^6.1.0"
   },
   "dependencies": {
+    "express": "^4.21.2",
     "hume": "^0.9.10",
     "react-router-dom": "^7.2.0",
     "react-webcam": "^7.2.0",
     "sass": "^1.84.0",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "uuid": "^11.1.0"
   }
 }
