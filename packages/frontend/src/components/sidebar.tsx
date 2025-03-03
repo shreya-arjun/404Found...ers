@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { UserInterface } from "../services/userDataService";
@@ -13,10 +12,6 @@ const fakeAccountData = {
 
 import { UserDataService } from "../services/userDataService";
 
-const fakeUserData = {
-  username: "test user",
-  imageURL: "/default_user.png"
-}
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -39,7 +34,6 @@ export default function Sidebar() {
     fetchUserAccountData();
   }, []);
 
-  const [userAccountData, setUserAccountData] = useState({ username: "loading...", imageURL: "default_user.png" });
 
   useEffect(() => {
     const fetchAccountData = async () => {
@@ -49,7 +43,7 @@ export default function Sidebar() {
 
       if (!userAccountData || !userAccountData.username) {
         console.error("Invalid user data received, using fallback.");
-        setUserAccountData(fakeUserData);
+        setUserAccountData(userAccountData);
       } else {
         setUserAccountData(userAccountData);
       }
@@ -60,25 +54,13 @@ export default function Sidebar() {
   return (
     <section className="homePageSidebar">
       <div
-          className="accountInfo"
-          onClick={() => {
-            navigate("/account");
-          }}>
-          <img
-            className="accountPFP"
-            src={userAccountData.userProfileImage}
-            alt="default pfp"
-          />
-          <h3 className="accountUsername">{userAccountData.username}</h3>
-        </div>
-      <div
         className="accountInfo"
         onClick={() => {
           navigate("/account");
         }}>
         <img
           className="accountPFP"
-          src={userAccountData.imageURL}
+          src={userAccountData.userProfileImage}
           alt="default pfp"
         />
         <h3 className="accountUsername">{userAccountData.username}</h3>
@@ -93,24 +75,7 @@ export default function Sidebar() {
         }}>
         Logout
       </button>
-      <button
-        className="sidebarButton"
-        onClick={() => {
-          localStorage.setItem("isLoggedIn", "false");
-          console.log("false");
-          navigate("/");
-        }}>
-        Logout
-      </button>
 
-      <button
-        className="sidebarButton"
-        onClick={() => {
-          navigate("/suggestion");
-        }}>
-        New Suggestion
-      </button>
-    </section>
       <button
         className="sidebarButton"
         onClick={() => {
